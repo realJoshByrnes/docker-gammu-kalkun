@@ -1,0 +1,10 @@
+#!/sbin/openrc-run
+
+# Gammu SMS Daemon
+pidfile="/var/run/$RC_SVCNAME.pid"
+command="/usr/bin/gammu-smsd"
+command_args="-d -p /var/run/$RC_SVCNAME.pid -c /etc/gammurc"
+
+depend() {
+	need root localmount
+}

@@ -1,0 +1,19 @@
+version: '3.1'
+
+services:
+  kalkun:
+    image: realjoshbyrnes/gammu-kalkun:0.7.1
+    restart: always
+    ports:
+      - 8080:80
+    devices:
+      - /dev/ttyUSB1:/dev/gsm-modem
+
+  kalkun-db:
+    image: realjoshbyrnes/mariadb-kalkun:0.7.1
+    restart: always
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: RANDOM
+      MYSQL_DATABASE: kalkun
+      MYSQL_USER: kalkun
+      MYSQL_PASSWORD: kalkun

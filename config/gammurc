@@ -1,0 +1,60 @@
+[gammu]
+port = /dev/gsm-modem
+connection = at115200
+logfile = /var/log/gammu/gammu.log
+logformat = textall
+
+[smsd]
+InboxPath = /var/spool/gammu/inbox/
+OutboxPath = /var/spool/gammu/outbox/
+SentSMSPath = /var/spool/gammu/sent/
+ErrorSMSPath = /var/spool/gammu/error/
+InboxFormat = unicode
+OutboxFormat = unicode
+TransmitFormat = auto
+
+#Service = files
+Service = sql
+User = kalkun
+Password = kalkun
+Host = kalkun-db
+Database = kalkun
+Driver = native_mysql
+SQL = mysql
+
+#PIN =
+#NetworkCode =
+#PhoneCode =
+LogFile = /var/log/gammu/smsd.log
+LogFacility = daemon
+debugLevel = 4
+CommTimeout = 30
+SendTimeout = 30
+MaxRetries = 1
+RetryTimeout = 600
+ReceiveFrequency = 15
+StatusFrequency = 60
+LoopSleep = 1
+MultipartTimeout = 600
+CheckSecurity = 0
+HangupCalls = 1
+CheckBattery = 1
+CheckSignal = 1
+CheckNetwork = 1
+ResetFrequency = 0
+HardResetFrequency = 0
+DeliveryReport = sms
+DeliveryReportDelay = 7200
+#PhoneID = ?
+#SMSC = +614xxyyyzzz
+RunOnReceive = /var/www/scripts/daemon.sh
+#RunOnFailure = 
+#RunOnSent =
+#RunOnIncomingCall =
+#IncludeNumbersFile = 
+#ExcludeNumbersFile =
+#IncludeSMSCFile
+#ExcludeSMSCFile
+BackendRetries = 10
+Send = True
+Receive = True
