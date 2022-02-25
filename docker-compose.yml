@@ -19,3 +19,8 @@ services:
       MYSQL_DATABASE: kalkun
       MYSQL_USER: kalkun
       MYSQL_PASSWORD: kalkun
+    volumes:
+      - kalkun_db:/var/lib/mysql
+
+volumes:
+  kalkun_db:
