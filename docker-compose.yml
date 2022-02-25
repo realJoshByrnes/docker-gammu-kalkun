@@ -8,6 +8,8 @@ services:
       - 8080:80
     devices:
       - /dev/ttyUSB1:/dev/gsm-modem
+    depends_on:
+      - "kalkun-db"
 
   kalkun-db:
     image: realjoshbyrnes/mariadb-kalkun:0.7.1

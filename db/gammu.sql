@@ -10,7 +10,7 @@
 
 CREATE TABLE `gammu` (
   `Version` integer NOT NULL default '0' PRIMARY KEY
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `gammu`
@@ -39,7 +39,7 @@ CREATE TABLE `inbox` (
   `Processed` enum('false','true') NOT NULL default 'false',
   `Status` integer NOT NULL default '-1',
   PRIMARY KEY `ID` (`ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1 ;
 
 --
 -- Dumping data for table `inbox`
@@ -76,7 +76,7 @@ CREATE TABLE `outbox` (
   `Status` enum('SendingOK','SendingOKNoReport','SendingError','DeliveryOK','DeliveryFailed','DeliveryPending','DeliveryUnknown','Error','Reserved') NOT NULL default 'Reserved',
   `StatusCode` integer NOT NULL default '-1',
   PRIMARY KEY `ID` (`ID`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 CREATE INDEX outbox_date ON outbox(SendingDateTime, SendingTimeOut);
 CREATE INDEX outbox_sender ON outbox(SenderID(250));
@@ -103,7 +103,7 @@ CREATE TABLE `outbox_multipart` (
   `Status` enum('SendingOK','SendingOKNoReport','SendingError','DeliveryOK','DeliveryFailed','DeliveryPending','DeliveryUnknown','Error','Reserved') NOT NULL default 'Reserved',
   `StatusCode` integer NOT NULL default '-1',
   PRIMARY KEY (`ID`, `SequencePosition`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `outbox_multipart`
@@ -132,7 +132,7 @@ CREATE TABLE `phones` (
   `Sent` int NOT NULL DEFAULT 0,
   `Received` int NOT NULL DEFAULT 0,
   PRIMARY KEY (`IMEI`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `phones`
@@ -166,7 +166,7 @@ CREATE TABLE `sentitems` (
   `CreatorID` text NOT NULL,
   `StatusCode` integer NOT NULL default '-1',
   PRIMARY KEY (`ID`, `SequencePosition`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 CREATE INDEX sentitems_date ON sentitems(DeliveryDateTime);
 CREATE INDEX sentitems_tpmr ON sentitems(TPMR);

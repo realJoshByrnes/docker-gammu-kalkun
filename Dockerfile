@@ -8,16 +8,17 @@ RUN /sbin/apk update && /sbin/apk add --no-cache \
   # Install Gammu-SMSD, PHP8, MariaDB-Client & OpenRC
     gammu-smsd php8 php8-fpm php8-mysqli php8-mbstring \
     php8-session php8-ctype openrc mariadb-client tzdata \
+    composer php8-intl \
   # Set default timezone to Australia/Sydney
   && cp /usr/share/zoneinfo/Australia/Sydney /etc/localtime \
   && echo "Australia/Sydney" >  /etc/timezone \
   && apk del tzdata \
   # Create required directories
-  && /bin/busybox mkdir -p /run/openrc /var/www/install /var/log/gammu \
+  && /bin/busybox mkdir -p /run/openrc /var/www /var/log/gammu \
   # Configure OpenRC
   && /bin/busybox touch /run/openrc/softlevel \
   # Get Kalkun and add to /var/www
-  && /bin/busybox wget -qO- https://github.com/realJoshByrnes/Kalkun/tarball/master | \
+  && /bin/busybox wget -qO- https://github.com/kalkun-sms/Kalkun/tarball/devel | \
      /bin/busybox tar x -zvf - -C /var/www --strip-components=1 \
   # Create www user
   && /bin/busybox adduser -D -g 'www' www \
@@ -26,8 +27,10 @@ RUN /sbin/apk update && /sbin/apk add --no-cache \
   && /bin/busybox sed -i "s|;listen.mode\s*=\s*0660|listen.mode = 0660|g" /etc/php8/php-fpm.d/www.conf \
   && /bin/busybox sed -i "s|user\s*=\s*nobody|user = www|g" /etc/php8/php-fpm.d/www.conf \
   && /bin/busybox sed -i "s|group\s*=\s*nobody|group = www|g" /etc/php8/php-fpm.d/www.conf \
-  && /bin/busybox sed -i "s|;chdir\s*=\s/var/www|chdir = /var/www|g" /etc/php8/php-fpm.d/www.conf #uncommenting line \
-  && /bin/busybox sed -i "s|;log_level\s*=\s*notice|log_level = notice|g" /etc/php8/php-fpm.conf #uncommenting line
+  && /bin/busybox sed -i "s|;chdir\s*=\s/var/www|chdir = /var/www|g" /etc/php8/php-fpm.d/www.conf \
+  && /bin/busybox sed -i "s|;log_level\s*=\s*notice|log_level = notice|g" /etc/php8/php-fpm.conf \
+  && cd /var/www/ \
+  && composer install --no-dev
 
 COPY ./config/nginx.conf /etc/nginx/nginx.conf
 COPY ./config/gammurc /etc/gammurc

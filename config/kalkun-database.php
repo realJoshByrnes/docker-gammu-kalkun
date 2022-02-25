@@ -1,24 +1,27 @@
 <?php
-if (!defined('BASEPATH')) exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direct script access allowed');
 
-$active_group = "default";
-$active_record = TRUE;
+$active_group = 'kalkun_mysql';
+$query_builder = TRUE;
 
-$db['default']['hostname'] = "kalkun-db";
-
-// MySQL
-$db['default']['username'] = "kalkun";
-$db['default']['password'] = "kalkun";
-$db['default']['database'] = "kalkun";
-$db['default']['dbdriver'] = "mysqli";
-
-$db['default']['dbprefix'] = "";
-$db['default']['pconnect'] = FALSE;
-$db['default']['db_debug'] = TRUE;
-$db['default']['cache_on'] = FALSE;
-$db['default']['cachedir'] = "";
-$db['default']['char_set'] = "utf8";
-$db['default']['dbcollat'] = "utf8_general_ci";
-
-/* End of file database.php */
-/* Location: ./application/config/database.php */
+$db['kalkun_mysql'] = array(
+    'dsn' => '',
+    'hostname' => 'kalkun-db',
+    'username' => 'kalkun',
+    'password' => 'kalkun',
+    'database' => 'kalkun',
+    'dbdriver' => 'mysqli',
+    'dbprefix' => '',
+    'pconnect' => FALSE,
+    'db_debug' => (ENVIRONMENT !== 'production'),
+    'cache_on' => FALSE,
+    'cachedir' => '',
+    'char_set' => 'utf8mb4',
+    'dbcollat' => 'utf8mb4_general_ci',
+    'swap_pre' => '',
+    'encrypt' => FALSE,
+    'compress' => FALSE,
+    'stricton' => FALSE,
+    'failover' => array(),
+    'save_queries' => TRUE
+);
